@@ -1,7 +1,7 @@
-%define _qtmodule_snapshot_version 5.0.0-beta1
+%define _qtmodule_snapshot_version 5.0.0
 Name:       qt5-qtxmlpatterns
 Summary:    Qt XML Patterns library
-Version:    5.0.0~beta1
+Version:    5.0.0
 Release:    1%{?dist}
 Group:      Qt/Qt
 License:    LGPLv2.1 with exception or GPLv3
@@ -86,14 +86,14 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 
 %files
 %defattr(-,root,root,-)
-%{_libdir}/libQtXmlPatterns.so.5
-%{_libdir}/libQtXmlPatterns.so.5.*
+%{_libdir}/libQt5XmlPatterns.so.5
+%{_libdir}/libQt5XmlPatterns.so.5.*
 %{_bindir}/*
 
 %files devel
 %defattr(-,root,root,-)
-%{_libdir}/libQtXmlPatterns.so
-%{_libdir}/libQtXmlPatterns.prl
+%{_libdir}/libQt5XmlPatterns.so
+%{_libdir}/libQt5XmlPatterns.prl
 %{_libdir}/pkgconfig/*
 %{_includedir}/qt5/
 %{_datadir}/qt5/mkspecs/
