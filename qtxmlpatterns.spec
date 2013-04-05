@@ -1,7 +1,7 @@
-%define _qtmodule_snapshot_version 5.0.0
+%define _qtmodule_snapshot_version 5.0.1
 Name:       qt5-qtxmlpatterns
 Summary:    Qt XML Patterns library
-Version:    5.0.0
+Version:    5.0.1
 Release:    1%{?dist}
 Group:      Qt/Qt
 License:    LGPLv2.1 with exception or GPLv3
@@ -52,7 +52,7 @@ This package contains the XMLPatterns library development files
 # ITS INTERNAL qmake MACRO. IT BREAKS THE BUILD!
 %build
 export QTDIR=/usr/share/qt5
-qmake
+qmake -qt=5
 make %{?_smp_flags}
 
 %install
@@ -88,7 +88,7 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 %defattr(-,root,root,-)
 %{_libdir}/libQt5XmlPatterns.so.5
 %{_libdir}/libQt5XmlPatterns.so.5.*
-%{_bindir}/*
+%{_qt5_bindir}/*
 
 %files devel
 %defattr(-,root,root,-)
