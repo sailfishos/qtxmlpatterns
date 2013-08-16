@@ -76,12 +76,6 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-
-
-
-#### File section
-
-
 %files
 %defattr(-,root,root,-)
 %{_libdir}/libQt5XmlPatterns.so.5
