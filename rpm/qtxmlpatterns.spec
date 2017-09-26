@@ -1,6 +1,6 @@
 Name:       qt5-qtxmlpatterns
 Summary:    Qt XML Patterns library
-Version:    5.6.2
+Version:    5.6.3
 Release:    1%{?dist}
 Group:      Qt/Qt
 License:    LGPLv2.1 with exception or GPLv3
@@ -70,16 +70,8 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 
 
 
-
-#### Pre/Post section
-
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
-
-
-
-
-#### File section
 
 
 %files
