@@ -70,16 +70,8 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 
 
 
-
-#### Pre/Post section
-
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
-
-
-
-
-#### File section
 
 
 %files
