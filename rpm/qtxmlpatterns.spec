@@ -2,9 +2,8 @@ Name:       qt5-qtxmlpatterns
 Summary:    Qt XML Patterns library
 Version:    5.6.3
 Release:    1%{?dist}
-Group:      Qt/Qt
-License:    LGPLv2.1 with exception or GPLv3
-URL:        http://qt.nokia.com
+License:    (LGPLv2 or LGPLv3) with exception or Qt Commercial
+URL:        https://www.qt.io
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  qt5-qtcore-devel
 BuildRequires:  qt5-qtxml-devel
@@ -24,7 +23,6 @@ This package contains the XMLPatterns library
 
 %package devel
 Summary:    Qt XML Patterns - development files
-Group:      Qt/Qt
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -76,6 +74,8 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 
 %files
 %defattr(-,root,root,-)
+%license LICENSE.LGPLv*
+%license LGPL_EXCEPTION.txt
 %{_libdir}/libQt5XmlPatterns.so.5
 %{_libdir}/libQt5XmlPatterns.so.5.*
 %{_qt5_bindir}/*
