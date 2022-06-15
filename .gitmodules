@@ -1,0 +1,3 @@
+[submodule "qt5-qtxmlpatterns"]
+	path = qt5-qtxmlpatterns
+	url = https://github.com/sailfishos-mirror/qtxmlpatterns.git
