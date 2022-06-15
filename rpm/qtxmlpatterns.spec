@@ -36,7 +36,7 @@ This package contains the XMLPatterns library development files
 #### Build section
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q -n %{name}-%{version}/%{name}
 
 # The original source assumes build happens within a monolithic tree.
 # The tool used is syncqt, which complains a lot but really only wants
