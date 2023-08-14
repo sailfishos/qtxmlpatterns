@@ -1,7 +1,7 @@
 Name:       qt5-qtxmlpatterns
 Summary:    Qt XML Patterns library
 Version:    5.6.3
-Release:    1%{?dist}
+Release:    1
 License:    (LGPLv2 or LGPLv3) with exception or Qt Commercial
 URL:        https://www.qt.io
 Source0:    %{name}-%{version}.tar.bz2
@@ -38,21 +38,14 @@ This package contains the XMLPatterns library development files
 %prep
 %setup -q -n %{name}-%{version}/%{name}
 
-# The original source assumes build happens within a monolithic tree.
-# The tool used is syncqt, which complains a lot but really only wants
-# to know where the mkspecs may be found. Hence the environment variable
-# name is a little misleading.
-#
-# XXX: FOR THE LOVE OF ALL THAT MAY BE HOLY - DO NOT USE RPMBUILD AND
-# ITS INTERNAL qmake MACRO. IT BREAKS THE BUILD!
+
 %build
-export QTDIR=/usr/share/qt5
 touch .git
-qmake -qt=5
-make %{?_smp_mflags}
+%qmake5
+
+%make_build
 
 %install
-rm -rf %{buildroot}
 %qmake5_install
 # Remove unneeded .la files
 rm -f %{buildroot}/%{_libdir}/*.la
@@ -61,7 +54,7 @@ find %{buildroot}%{_libdir} -type f -name '*.prl' \
 -exec sed -i -e "/^QMAKE_PRL_BUILD_DIR/d;s/\(QMAKE_PRL_LIBS =\).*/\1/" {} \;
 
 # We don't need qt5/Qt/
-rm -rf %{buildroot}/%{_includedir}/qt5/Qt
+rm -rf %{buildroot}/%{_qt5_includedir}/Qt
 
 #
 %fdupes %{buildroot}/%{_includedir}
@@ -76,17 +69,17 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 %defattr(-,root,root,-)
 %license LICENSE.LGPLv*
 %license LGPL_EXCEPTION.txt
-%{_libdir}/libQt5XmlPatterns.so.5
-%{_libdir}/libQt5XmlPatterns.so.5.*
+%{_qt5_libdir}/libQt5XmlPatterns.so.5
+%{_qt5_libdir}/libQt5XmlPatterns.so.5.*
 %{_qt5_bindir}/*
 
 %files devel
 %defattr(-,root,root,-)
-%{_libdir}/libQt5XmlPatterns.so
-%{_libdir}/libQt5XmlPatterns.prl
-%{_libdir}/pkgconfig/*
-%{_includedir}/qt5/
-%{_datadir}/qt5/mkspecs/
+%{_qt5_libdir}/libQt5XmlPatterns.so
+%{_qt5_libdir}/libQt5XmlPatterns.prl
+%{_qt5_libdir}/pkgconfig/*
+%{_qt5_includedir}
+%{_qt5_archdatadir}/mkspecs/
 %{_libdir}/cmake/
 
 
