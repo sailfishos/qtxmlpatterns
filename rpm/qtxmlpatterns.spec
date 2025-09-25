@@ -3,7 +3,7 @@ Summary:    Qt XML Patterns library
 Version:    5.6.3
 Release:    1%{?dist}
 License:    (LGPLv2 or LGPLv3) with exception or Qt Commercial
-URL:        https://www.qt.io
+URL:        https://github.com/sailfishos/qtxmlpatterns
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  qt5-qtcore-devel
 BuildRequires:  qt5-qtxml-devel
@@ -14,45 +14,24 @@ BuildRequires:  qt5-qmake
 BuildRequires:  fdupes
 
 %description
-Qt is a cross-platform application and UI framework. Using Qt, you can
-write web-enabled applications once and deploy them across desktop,
-mobile and embedded systems without rewriting the source code.
-.
-This package contains the XMLPatterns library
-
+The Qt XML Patterns module provides support for XPath, XQuery, XSLT,
+and XML Schema validation.
 
 %package devel
 Summary:    Qt XML Patterns - development files
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
-Qt is a cross-platform application and UI framework. Using Qt, you can
-write web-enabled applications once and deploy them across desktop,
-mobile and embedded systems without rewriting the source code.
-.
-This package contains the XMLPatterns library development files
-
-
-#### Build section
+%{summary}.
 
 %prep
 %setup -q -n %{name}-%{version}/%{name}
 
-# The original source assumes build happens within a monolithic tree.
-# The tool used is syncqt, which complains a lot but really only wants
-# to know where the mkspecs may be found. Hence the environment variable
-# name is a little misleading.
-#
-# XXX: FOR THE LOVE OF ALL THAT MAY BE HOLY - DO NOT USE RPMBUILD AND
-# ITS INTERNAL qmake MACRO. IT BREAKS THE BUILD!
 %build
-export QTDIR=/usr/share/qt5
-touch .git
-qmake -qt=5
-make %{?_smp_mflags}
+%qmake5
+%make_build
 
 %install
-rm -rf %{buildroot}
 %qmake5_install
 # Remove unneeded .la files
 rm -f %{buildroot}/%{_libdir}/*.la
@@ -63,17 +42,13 @@ find %{buildroot}%{_libdir} -type f -name '*.prl' \
 # We don't need qt5/Qt/
 rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 
-#
 %fdupes %{buildroot}/%{_includedir}
-
 
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-
 %files
-%defattr(-,root,root,-)
 %license LICENSE.LGPLv*
 %license LGPL_EXCEPTION.txt
 %{_libdir}/libQt5XmlPatterns.so.5
@@ -81,13 +56,9 @@ rm -rf %{buildroot}/%{_includedir}/qt5/Qt
 %{_qt5_bindir}/*
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/libQt5XmlPatterns.so
 %{_libdir}/libQt5XmlPatterns.prl
 %{_libdir}/pkgconfig/*
 %{_includedir}/qt5/
 %{_datadir}/qt5/mkspecs/
 %{_libdir}/cmake/
-
-
-#### No changelog section, separate $pkg.changes contains the history
