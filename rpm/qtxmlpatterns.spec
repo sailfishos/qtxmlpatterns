@@ -28,7 +28,8 @@ Requires:   %{name} = %{version}-%{release}
 %setup -q -n %{name}-%{version}/%{name}
 
 %build
-%qmake5
+# Force git_build so that qmake does the syncqt stuff also on OBS builds
+%qmake5 CONFIG+=git_build
 %make_build
 
 %install
